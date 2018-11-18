@@ -11,4 +11,6 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'pl.pragmatists', name: 'JUnitParams', version: '1.0.4'
+    compile 'io.github.marmer.testutils:hamcrest-matcher-generator-core:3.2.0'
 }
