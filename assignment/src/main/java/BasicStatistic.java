@@ -1,22 +1,36 @@
+import java.util.*;
+
 /**
  * very simple implementation of the BasicStatisticInterface
  */
 public class BasicStatistic implements BasicStatisticInterface {
 
+    private ArrayList myList = new ArrayList<Double>();
+
+    public List<Double> getMyList() {
+        return myList;
+    }
+
+    public void setMyList(ArrayList<Double> myList) {
+        this.myList = myList;
+    }
+
     @Override
     public void addDoubleToData(Double valueToAdd){
-
+        getMyList().add(valueToAdd);
     }
 
     @Override
     public void clearData(){
-
+        getMyList().clear();
     };
-	
+
     @Override
     public int numberOfDataItems(){
-        int rv = 0;
-        return rv;
+        if (getMyList().isEmpty())
+            return 0;
+        else
+            return getMyList().size();
     }
 
     @Override
