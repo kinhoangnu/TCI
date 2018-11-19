@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.DoubleToIntFunction;
 
 /**
  * very simple implementation of the BasicStatisticInterface
@@ -50,14 +51,33 @@ public class BasicStatistic implements BasicStatisticInterface {
 
     @Override
     public Double getMean() throws NoDataItemsException {
-        double rv = 0.0;
-        return rv;
+        Double mean = 0d;
+        if(myList.isEmpty())
+            throw new NoDataItemsException();
+        else
+        for (int i = 0; i< myList.size(); i++){
+            mean += myList.get(i);
+        }
+        return mean/myList.size();
     }
 
     @Override
     public double getMedian() throws NoDataItemsException {
-        double rv = 0.0;
-        return rv;
+        Double median = 0d;
+        if(myList.isEmpty())
+            throw new NoDataItemsException();
+        else {
+            if((myList.size() & 1) == 0){
+                Double leftMiddle = myList.get((myList.size()/2)-1);
+                Double rightMiddle = myList.get(myList.size()/2);
+                median = (leftMiddle+rightMiddle)/2;
+            }else{
+                Double i = (myList.size()/2)+0.5;
+                median = myList.get((int)Math.round(i)-1);
+            }
+        }
+            return median;
+
     }
 
     @Override

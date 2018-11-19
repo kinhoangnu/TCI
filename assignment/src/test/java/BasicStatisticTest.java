@@ -76,22 +76,65 @@ public class BasicStatisticTest {
         //assert
     }
 
-    @Test
-    public void getMean() {
+    @Test(expected = NoDataItemsException.class)
+    public void getMeanMustThrowExceptionIfListIsEmpty() throws NoDataItemsException {
         //arrange
-
+        Double result;
         //act
-
+        result = basicStatistic.getMean();
         //assert
     }
 
     @Test
-    public void getMedian() {
+    public void getMeanMustReturnTheMeanOfAllProducts() throws NoDataItemsException {
         //arrange
-
+        Double result;
+        basicStatistic.addDoubleToData(1d);
+        basicStatistic.addDoubleToData(2d);
+        basicStatistic.addDoubleToData(3d);
         //act
-
+        result = basicStatistic.getMean();
         //assert
+        assertEquals((Double)2d,result);
+    }
+
+    @Test(expected = NoDataItemsException.class)
+    public void getMedianMustThrowExceptionIfListIsEmpty() throws NoDataItemsException {
+        //arrange
+        Double result;
+        //act
+        result = basicStatistic.getMedian();
+        //assert
+        assertEquals((Double)2d,result);
+    }
+
+    @Test
+    public void getMedianMustReturnTheMiddleNumberIfNumberOfItemIsOdd() throws NoDataItemsException {
+        //arrange
+        Double result;
+        basicStatistic.addDoubleToData(1d);
+        basicStatistic.addDoubleToData(2d);
+        basicStatistic.addDoubleToData(3d);
+        basicStatistic.addDoubleToData(5d);
+        basicStatistic.addDoubleToData(8d);
+        //act
+        result = basicStatistic.getMedian();
+        //assert
+        assertEquals((Double)3d,result);
+    }
+
+    @Test
+    public void getMedianMustReturnTheMeanOfTwoMiddleNumbersIfNumberOfItemIsEven() throws NoDataItemsException {
+        //arrange
+        Double result;
+        basicStatistic.addDoubleToData(1d);
+        basicStatistic.addDoubleToData(2d);
+        basicStatistic.addDoubleToData(3d);
+        basicStatistic.addDoubleToData(4d);
+        //act
+        result = basicStatistic.getMedian();
+        //assert
+        assertEquals((Double)2.5,result);
     }
 
     @Test

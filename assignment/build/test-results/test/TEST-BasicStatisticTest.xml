@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="BasicStatisticTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2018-11-19T17:15:11" hostname="DESKTOP-MSSMJQD" time="0.005">
+  <properties/>
+  <testcase name="clearDataShouldReturnEmptyList" classname="BasicStatisticTest" time="0.001"/>
+  <testcase name="getMean" classname="BasicStatisticTest" time="0.0"/>
+  <testcase name="addDoubleToDataShouldReturnIncrementedValue" classname="BasicStatisticTest" time="0.0"/>
+  <testcase name="sumMustReturnExactValue" classname="BasicStatisticTest" time="0.0"/>
+  <testcase name="getMedian" classname="BasicStatisticTest" time="0.0"/>
+  <testcase name="getStandardDeviation" classname="BasicStatisticTest" time="0.0"/>
+  <testcase name="highestValue" classname="BasicStatisticTest" time="0.0"/>
+  <testcase name="numberOfDataItemsMustReturnZero" classname="BasicStatisticTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
