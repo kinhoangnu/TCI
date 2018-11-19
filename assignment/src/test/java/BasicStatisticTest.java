@@ -5,46 +5,66 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class BasicStatisticTest {
+
     private BasicStatistic basicStatistic = new BasicStatistic();
+
     @Test
-    public void addDoubleToData() {
+    public void addDoubleToDataShouldReturnIncrementedValue() {
         //arrange
-        Double number;
+        Double value1 = 1d, value2 = 2d;
+        boolean isEmpty;
+        int size;
+
         //act
-        basicStatistic.addDoubleToData(1.1);
-        number = basicStatistic.getMyList().get(0);
+        basicStatistic.addDoubleToData(value1);
+        basicStatistic.addDoubleToData(value2);
+        isEmpty = basicStatistic.getMyList().isEmpty();
+        size = basicStatistic.getMyList().size();
+
         //assert
-        assertEquals((Double)1.1,number);
-        assertFalse(basicStatistic.getMyList().isEmpty());
+        assertEquals(2, size);
+        assertFalse(isEmpty);
     }
 
     @Test
-    public void clearData() {
+    public void clearDataShouldReturnEmptyList() {
         //arrange
+        basicStatistic.addDoubleToData(1d);
+        boolean isEmpty;
 
         //act
         basicStatistic.getMyList().clear();
+        isEmpty = basicStatistic.getMyList().isEmpty();
+
         //assert
-        assertTrue(basicStatistic.getMyList().isEmpty());
+        assertTrue(isEmpty);
     }
 
     @Test
-    public void numberOfDataItems() {
+    public void numberOfDataItemsMustReturnZero() {
         //arrange
+        basicStatistic.getMyList().clear();
 
         //act
+        int result = basicStatistic.numberOfDataItems();
 
         //assert
-        assertEquals(0,basicStatistic.numberOfDataItems());
+        assertEquals(0, result);
     }
 
     @Test
-    public void sum() {
+    public void sumMustReturnExactValue() {
         //arrange
+        Double result;
+        basicStatistic.addDoubleToData(1d);
+        basicStatistic.addDoubleToData(2d);
+        basicStatistic.addDoubleToData(3d);
 
         //act
+        result = basicStatistic.sum();
 
         //assert
+        assertEquals((Double)6d, result);
     }
 
     @Test

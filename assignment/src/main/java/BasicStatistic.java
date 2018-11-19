@@ -5,7 +5,7 @@ import java.util.*;
  */
 public class BasicStatistic implements BasicStatisticInterface {
 
-    private ArrayList myList = new ArrayList<Double>();
+    private List<Double> myList = new ArrayList<Double>();
 
     public List<Double> getMyList() {
         return myList;
@@ -17,26 +17,29 @@ public class BasicStatistic implements BasicStatisticInterface {
 
     @Override
     public void addDoubleToData(Double valueToAdd){
-        getMyList().add(valueToAdd);
+        myList.add(valueToAdd);
     }
 
     @Override
     public void clearData(){
-        getMyList().clear();
+        myList.clear();
     };
 
     @Override
     public int numberOfDataItems(){
-        if (getMyList().isEmpty())
+        if (myList.isEmpty())
             return 0;
         else
-            return getMyList().size();
+            return myList.size();
     }
 
     @Override
     public Double sum(){
-        double rv = 0.0;
-        return rv;
+        Double result = 0d;
+        for (Double data : myList){
+            result += data;
+        }
+        return result;
     }
 
     @Override
