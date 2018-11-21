@@ -67,26 +67,14 @@ public class BasicStatisticTest {
         assertEquals((Double)6d, result);
     }
 
-    @Test
-    public void highestValue() {
-        //arrange
-
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getMeanMustThrowExceptionIfListIsEmpty(){
         //act
-
-        //assert
-    }
-
-    @Test(expected = NoDataItemsException.class)
-    public void getMeanMustThrowExceptionIfListIsEmpty() throws NoDataItemsException {
-        //arrange
-        Double result;
-        //act
-        result = basicStatistic.getMean();
-        //assert
+        basicStatistic.getMean();
     }
 
     @Test
-    public void getMeanMustReturnTheMeanOfAllProducts() throws NoDataItemsException {
+    public void getMeanMustReturnTheMeanOfAllProducts(){
         //arrange
         Double result;
         basicStatistic.addDoubleToData(1d);
@@ -98,18 +86,14 @@ public class BasicStatisticTest {
         assertEquals((Double)2d,result);
     }
 
-    @Test(expected = NoDataItemsException.class)
-    public void getMedianMustThrowExceptionIfListIsEmpty() throws NoDataItemsException {
-        //arrange
-        Double result;
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getMedianMustThrowExceptionIfListIsEmpty(){
         //act
-        result = basicStatistic.getMedian();
-        //assert
-        assertEquals((Double)2d,result);
+        basicStatistic.getMedian();
     }
 
     @Test
-    public void getMedianMustReturnTheMiddleNumberIfNumberOfItemIsOdd() throws NoDataItemsException {
+    public void getMedianMustReturnTheMiddleNumberIfNumberOfItemIsOdd(){
         //arrange
         Double result;
         basicStatistic.addDoubleToData(1d);
@@ -124,7 +108,7 @@ public class BasicStatisticTest {
     }
 
     @Test
-    public void getMedianMustReturnTheMeanOfTwoMiddleNumbersIfNumberOfItemIsEven() throws NoDataItemsException {
+    public void getMedianMustReturnTheMeanOfTwoMiddleNumbersIfNumberOfItemIsEven(){
         //arrange
         Double result;
         basicStatistic.addDoubleToData(1d);
@@ -139,6 +123,15 @@ public class BasicStatisticTest {
 
     @Test
     public void getStandardDeviation() {
+        //arrange
+
+        //act
+
+        //assert
+    }
+
+    @Test
+    public void highestValue() {
         //arrange
 
         //act

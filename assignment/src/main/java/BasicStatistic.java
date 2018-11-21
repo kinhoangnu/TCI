@@ -6,7 +6,7 @@ import java.util.function.DoubleToIntFunction;
  */
 public class BasicStatistic implements BasicStatisticInterface {
 
-    private List<Double> myList = new ArrayList<Double>();
+    private List<Double> myList = new ArrayList<>();
 
     public List<Double> getMyList() {
         return myList;
@@ -44,44 +44,46 @@ public class BasicStatistic implements BasicStatisticInterface {
     }
 
     @Override
-    public Double highestValue() throws NoDataItemsException {
+    public Double getMean() {
+        Double total = 0d;
+        Collections.sort(myList);
+        if (myList.isEmpty())
+            throw new IndexOutOfBoundsException();
+        else {
+            for (int i = 0; i < myList.size(); i++) {
+                total += myList.get(i);
+            }
+            return total / myList.size();
+        }
+    }
+
+    @Override
+    public double getMedian(){
+        Double median;
+        Collections.sort(myList);
+        if (myList.isEmpty())
+            throw new IndexOutOfBoundsException();
+        else {
+            if ((myList.size() % 2) == 0) {
+                int firstMiddleIndex = myList.size() / 2;
+                int secondMiddleIndex = firstMiddleIndex - 1;
+                median = (myList.get(firstMiddleIndex) + myList.get(secondMiddleIndex)) / 2;
+            } else {
+                int index = ((myList.size() - 1) / 2);
+                median = myList.get(index);
+            }
+            return median;
+        }
+    }
+
+    @Override
+    public double getStandardDeviation() throws NoDataItemsException {
         double rv = 0.0;
         return rv;
     }
 
     @Override
-    public Double getMean() throws NoDataItemsException {
-        Double mean = 0d;
-        if(myList.isEmpty())
-            throw new NoDataItemsException();
-        else
-        for (int i = 0; i< myList.size(); i++){
-            mean += myList.get(i);
-        }
-        return mean/myList.size();
-    }
-
-    @Override
-    public double getMedian() throws NoDataItemsException {
-        Double median = 0d;
-        if(myList.isEmpty())
-            throw new NoDataItemsException();
-        else {
-            if((myList.size() & 1) == 0){
-                Double leftMiddle = myList.get((myList.size()/2)-1);
-                Double rightMiddle = myList.get(myList.size()/2);
-                median = (leftMiddle+rightMiddle)/2;
-            }else{
-                Double i = (myList.size()/2)+0.5;
-                median = myList.get((int)Math.round(i)-1);
-            }
-        }
-            return median;
-
-    }
-
-    @Override
-    public double getStandardDeviation() throws NoDataItemsException {
+    public Double highestValue() throws NoDataItemsException {
         double rv = 0.0;
         return rv;
     }
