@@ -130,12 +130,24 @@ public class BasicStatisticTest {
         //assert
     }
 
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void highestValue() {
         //arrange
-
         //act
+        basicStatistic.highestValue();
+    }
 
+    @Test
+    public void highestValueMustReturnHighestValue() {
+        //arrange
+        Double result;
+        basicStatistic.addDoubleToData(1d);
+        basicStatistic.addDoubleToData(5d);
+        basicStatistic.addDoubleToData(3d);
+        basicStatistic.addDoubleToData(4d);
+        //act
+        result = basicStatistic.highestValue();
         //assert
+        assertEquals((Double)5d,result);
     }
 }

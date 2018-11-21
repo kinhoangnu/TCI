@@ -83,8 +83,20 @@ public class BasicStatistic implements BasicStatisticInterface {
     }
 
     @Override
-    public Double highestValue() throws NoDataItemsException {
-        double rv = 0.0;
-        return rv;
+    public Double highestValue() {
+        Double highest = 0d;
+        Collections.sort(myList);
+        if (myList.isEmpty())
+            throw new IndexOutOfBoundsException();
+        else {
+            for (int i = 0; i < myList.size();i++){
+                if (myList.get(i) > highest){
+                    highest = myList.get(i);
+                }
+            }
+        }
+        return highest;
     }
+
+
 }
