@@ -17,10 +17,8 @@ public class CourseTest {
         //arrange
         startDate = LocalDate.of(1999,1,1);
         endDate = LocalDate.of(1998,1,1);
-        course = new Course("engrish", startDate, endDate);
-        //act
-        LocalDate newDate = course.getEndDate();
-        //assert
-    }
 
+        //act
+        course = new Course("English", startDate, endDate);
+    }
 }

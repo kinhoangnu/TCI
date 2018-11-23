@@ -1,11 +1,10 @@
-import sun.util.calendar.BaseCalendar;
-
 import java.time.LocalDate;
 
 public class Course {
-    String name;
-    LocalDate startDate;
-    LocalDate endDate;
+
+    private String name;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public String getName() {
         return name;
@@ -15,19 +14,16 @@ public class Course {
         return startDate;
     }
 
-    public LocalDate getEndDate() throws CourseDateException {
-        if (endDate.compareTo(startDate) < 0) {
-            throw new CourseDateException();
-        }
-        else
-        return endDate;
-    }
+    public LocalDate getEndDate()  { return endDate; }
 
-    public Course(String name, LocalDate startDate, LocalDate endDate) {
+    public Course(String name, LocalDate startDate, LocalDate endDate) throws CourseDateException{
         this.name = name;
         this.startDate = startDate;
-        this.endDate = endDate;
+        if (endDate.compareTo(startDate) < 0) {
+            throw new CourseDateException("the ending date is earlier than the starting date");
+        }
+        else {
+            this.endDate = endDate;
+        }
     }
-
-
 }
