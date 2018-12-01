@@ -1,4 +1,7 @@
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -137,17 +140,21 @@ public class BasicStatisticTest {
         basicStatistic.highestValue();
     }
 
-    @Test
-    public void highestValueMustReturnHighestValue() {
+    @DisplayName("Should calculate the correct sum")
+    @ParameterizedTest(name = "{index} => a={0}, b={1}, c={2}, highest={3}")
+    @CsvSource({
+            "1d, 1d, 2d, 2d",
+            "2d, 3d, 5d, 5d",
+            "1000d, 3213d, 23d, 3213d"
+    })
+    public void highestValueMustReturnHighestValue(double a, double b,double c, double highest) {
         //arrange
         Double result;
-        basicStatistic.addDoubleToData(1d);
-        basicStatistic.addDoubleToData(5d);
-        basicStatistic.addDoubleToData(3d);
-        basicStatistic.addDoubleToData(4d);
+        basicStatistic.addDoubleToData(a);
+        basicStatistic.addDoubleToData(b);
+        basicStatistic.addDoubleToData(c);
         //act
-        result = basicStatistic.highestValue();
         //assert
-        assertEquals((Double)5d,result);
+        assertEquals((Double)highest,basicStatistic.highestValue());
     }
 }
