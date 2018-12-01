@@ -12,21 +12,20 @@ public class SchoolTest {
     School school;
     Course course;
 
-    @Test (expected = CourseDateException.class)
-    public void getNameCannotBeNull() throws CourseDateException {
+    @Test (expected = NullPointerException.class)
+    public void getNameCannotBeNull(){
         //arrange
         LocalDate openDate = LocalDate.of(1999,2, 2);
-        school = new School(null,openDate);
+
         //act
-        String name = school.getName();
+        school = new School(null,openDate);
+
     }
 
-    @Test (expected = CourseDateException.class)
-    public void getOpeningDateCannotBeNull() throws CourseDateException {
-        //arrange
-        school = new School("Fontys",null);
+    @Test (expected = NullPointerException.class)
+    public void getOpeningDateCannotBeNull(){
         //act
-        LocalDate openDate = school.getOpeningDate();
+        school = new School("Fontys",null);
     }
 
     @Test
@@ -40,11 +39,12 @@ public class SchoolTest {
         //act
         school.addCourse(course);
         //assert
-        school.courseList.contains(course);
+        assertTrue(school.getCourseList().contains(course));
+        assertEquals(1, school.getCourseList().size());
     }
 
     @Test (expected = CourseDateException.class)
-    public void addCourseMustThrowExceptionIfCourseEndDateIsBeforeCourseStartDate() throws CourseDateException, DuplicateCourseException {
+    public void addCourseMustThrowExceptionIfCourseStartDateIsBeforeSchoolOpenDate() throws CourseDateException, DuplicateCourseException {
         //arrange
         LocalDate courseStartDate = LocalDate.of(2018,2,2);
         LocalDate courseEndDate = LocalDate.of(2018,2,3);
@@ -75,19 +75,19 @@ public class SchoolTest {
         LocalDate courseStartDate = LocalDate.of(2018,2,2);
         LocalDate courseEndDate = LocalDate.of(2018,2,3);
         LocalDate schoolOpenDate = LocalDate.of(2018,2,1);
-        Course course1 = new Course("math", courseStartDate, courseEndDate);
-        Course course2 = new Course("literature", courseStartDate, courseEndDate);
+        Course course = new Course("math", courseStartDate, courseEndDate);
         school = new School("Fontys", schoolOpenDate);
-        school.addCourse(course1);
-        school.addCourse(course2);
+        school.addCourse(course);
         //act
         Course courseToCompare = school.getCourseByName("math");
         //assert
-        assertEquals(courseToCompare,course1);
+        assertEquals(courseToCompare, course);
+        assertTrue(course.getName() == courseToCompare.getName());
     }
 
     @Test (expected = NullPointerException.class)
     public void getCourseByNameMustReturnNullIfCourseNameDoesNotExist(){
+        //assert
         assertNull(school.getCourseByName("nothing"));
     }
 
@@ -103,15 +103,17 @@ public class SchoolTest {
         school.addCourse(course1);
         school.addCourse(course2);
         //act
-        ArrayList<String> nameList = school.getCourseNameList();
+        List<String> nameList = school.getCourseNameList();
         //assert
+        assertEquals(2, nameList.size());
         assertTrue(nameList.contains("math"));
         assertTrue(nameList.contains("literature"));
     }
 
     @Test (expected = NullPointerException.class)
     public void getCourseNameListMustReturnNullIfThereIsNoCourse(){
-        ArrayList<String> nameList = school.getCourseNameList();
+        //assert
+        assertNull(school.getCourseNameList());
     }
 
     @Test
@@ -126,15 +128,16 @@ public class SchoolTest {
         school.addCourse(course1);
         school.addCourse(course2);
         //act
-        ArrayList<Course> courseList = school.getCourseList();
+        List<Course> courseList = school.getCourseList();
         //assert
+        assertEquals(2, courseList.size());
         assertTrue(courseList.contains(course1));
         assertTrue(courseList.contains(course2));
     }
 
     @Test (expected = NullPointerException.class)
     public void getCourseListMustReturnNullIfThereIsNoCourse(){
-        ArrayList<Course> courseList = school.getCourseList();
+        //assert
+        assertNull(school.getCourseList());
     }
-
 }

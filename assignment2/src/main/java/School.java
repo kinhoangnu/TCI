@@ -2,60 +2,65 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class School {
-    public String getName() throws CourseDateException{
-        if(name == null)
-            throw new CourseDateException();
-        else
+
+    private String name;
+    private LocalDate openingDate;
+    private List<Course> courseList;
+    private List<String> courseNameList;
+
+    public String getName(){
         return name;
     }
 
-    public LocalDate getOpeningDate() throws CourseDateException{
-        if(openingDate == null)
-            throw new CourseDateException();
-        else
+    public LocalDate getOpeningDate() {
         return openingDate;
     }
 
-    String name;
-    LocalDate openingDate;
-    ArrayList<Course> courseList;
-    ArrayList<String> courseNameList;
+
+    public List<Course> getCourseList(){
+        return courseList;
+    }
+
+    public List<String> getCourseNameList(){
+        return courseNameList;
+    }
 
     public School(String name, LocalDate openingDate) {
-        this.name = name;
-        this.openingDate = openingDate;
-        this.courseList = new ArrayList<Course>();
+        if (name == null){
+            throw new NullPointerException("The name of the school cannot be null");
+        }
+        else {
+            this.name = name;
+        }
+        if (openingDate == null){
+            throw new NullPointerException("The opening date of the school cannot be null");
+        }
+        else {
+            this.openingDate = openingDate;
+        }
+        this.courseList = new ArrayList<>();
+        this.courseNameList = new ArrayList<>();
     }
 
     public void addCourse(Course course) throws CourseDateException, DuplicateCourseException{
-        if(course.startDate.compareTo(openingDate) < 0){
-            throw new CourseDateException();
+        if(course.getStartDate().compareTo(openingDate) < 0){
+            throw new CourseDateException("The starting date of a course cannot be earlier than that of a school");
         }
-        for (Course c: courseList){
-            if(c.name == course.name)
-            throw new DuplicateCourseException();
+        if (!courseList.isEmpty()){
+            for (Course c: courseList){
+                if(c.getName() == course.getName())
+                    throw new DuplicateCourseException("Course name is duplicated");
+            }
         }
         courseList.add(course);
+        courseNameList.add(course.getName());
     }
 
     public Course getCourseByName(String name){
         for (Course c: courseList){
-            if(c.name == name)
+            if(c.getName() == name)
                 return c;
         }
-            return null;
+        return null;
     }
-
-    public ArrayList<String> getCourseNameList(){
-        courseNameList = new ArrayList<String>();
-        for (Course c: courseList) {
-            courseNameList.add(c.name);
-        }
-        return courseNameList;
-    }
-
-    public ArrayList<Course> getCourseList(){
-        return courseList;
-    }
-
 }
