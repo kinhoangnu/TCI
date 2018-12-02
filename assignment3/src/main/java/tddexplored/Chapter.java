@@ -46,6 +46,6 @@ public class Chapter implements Comparable<Chapter>{
 
     @Override
     public int compareTo(Chapter c) {
-        return (int) (Double.parseDouble(number) - Double.parseDouble(c.getNumber()));
+        return (Double.compare(Double.parseDouble(number),Double.parseDouble(c.getNumber())));
     }
 }

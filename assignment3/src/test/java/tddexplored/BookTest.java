@@ -12,8 +12,8 @@ class BookTest {
     ArrayList<Chapter> myChapterList = new ArrayList<Chapter>();
     Chapter chapter1 = new Chapter("HappyTree", "1");
     Chapter chapter2 = new Chapter("SAD", "2");
-    Chapter chapter3 = new Chapter("HappyTree2", "1.2");
-    Chapter chapter4 = new Chapter("HappyTree1", "1.1");
+    Chapter chapter3 = new Chapter("HappyTree2", "1.1");
+    Chapter chapter4 = new Chapter("HappyTree1", "1.2");
     Chapter chapter5 = new Chapter("Live", "3");
 
     @Test
@@ -25,7 +25,6 @@ class BookTest {
         myChapterList.add(chapter5);
 
         myBook = new Book(myChapterList);
-        assertEquals(chapter1, myBook.getSortedList().get(0));
-        assertEquals(chapter4, myBook.getSortedList().get(2));
+        assertEquals("1.2", myBook.getSortedList().get(2).getNumber());
     }
 }
