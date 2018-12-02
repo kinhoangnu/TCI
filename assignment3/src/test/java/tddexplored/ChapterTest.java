@@ -10,8 +10,6 @@ import org.junit.rules.ExpectedException;
 class ChapterTest {
 
     Chapter myChapter;
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
 
     @ParameterizedTest(name = "{index} => a={0}, b={1}")
     @CsvSource({
